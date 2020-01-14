@@ -7,6 +7,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 import utilities.LocalDriverManager;
 
 
@@ -14,7 +17,8 @@ public class BaseTest {
     WebDriver driver = null;
     EventFiringWebDriver eventDriver;
     WebEventListener eventListener;
-
+    @BeforeTest
+    @Parameters({"browser", "domain"})
     public void beforeMethod(String browser, String url) {
         switch (browser.toLowerCase()) {
             case "chrome":
@@ -44,7 +48,7 @@ public class BaseTest {
         System.out.println("Browser name : " + browser);
         System.out.println("Navigating to : " + url);
     }
-
+    @AfterTest
     public void afterMethod() {
         LocalDriverManager.getDriver().quit();
     }

@@ -10,8 +10,8 @@ public class NextGenTest extends BaseTest {
     @Test
     public void BookTitleValidations(){
 
-        BaseTest  baseTest = new BaseTest();
-        baseTest.beforeMethod("chrome", "https://www.nextgenerationautomation.com/automation-library");
+        /*BaseTest  baseTest = new BaseTest();
+        baseTest.beforeMethod("chrome", "https://www.nextgenerationautomation.com/automation-library");*/
 
 
         NextGenAutomationLibrary nextGen = new NextGenAutomationLibrary();
@@ -22,6 +22,6 @@ public class NextGenTest extends BaseTest {
         System.out.println(noOfBooks);
         System.out.println(bookTitles);*/
 
-        baseTest.afterMethod();
+        /*baseTest.afterMethod();*/
     }
 }
