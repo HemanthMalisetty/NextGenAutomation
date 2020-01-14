@@ -9,10 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class ExcelUtil {
     public static final String EXCEL_FILE_LOCATION = System.getProperty("user.dir") + "\\src\\main\\resources\\TestData.xlsx";
@@ -48,32 +45,18 @@ public class ExcelUtil {
         }
     }
 
-    public static Map<String, Map<String, String >> getMapData(){
+    public List<String> getTitles(){
         if (sheet == null){
             loadExcel();
         }
-        Map<String, Map<String, String>> superMap = new HashMap<>();
-        Map<String, String> myMap = new HashMap<>();
+        List<String> myList = new ArrayList<>();
 
         for (int i = 1 ; i < sheet.getLastRowNum()+1 ; i++)
         {
             row = sheet.getRow(i);
             String keyCell = formatter.formatCellValue(row.getCell(0));
-            int colNumber = row.getLastCellNum();
-            for (int j = 1 ; j < colNumber ; j++){
-                String value = formatter.formatCellValue(row.getCell(j));
-                myMap.put(keyCell, value);
-            }
-            superMap.put("master", myMap);
+            myList.add(keyCell);
         }
-        return superMap;
-    }
-    public static String getValue(String key){
-        Map<String, String> myVal = getMapData().get("master");
-        return myVal.get(key);
-    }
-    public static Set<String> getKeySet(){
-        Map<String, String> myVal = getMapData().get("master");
-        return myVal.keySet();
+        return myList;
     }
 }

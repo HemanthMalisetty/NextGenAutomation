@@ -1,6 +1,5 @@
 package utilities;
 
-import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -13,7 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 import java.util.Set;
 
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class DriverHelper {
     WebDriver driver = LocalDriverManager.getDriver();
@@ -123,14 +121,6 @@ public class DriverHelper {
             return false;
         }
     }
-    /*fun isDisplayed(xpath: String): Boolean {
-        try {
-            return driver.findElement(By.xpath(xpath)).isDisplayed
-        } catch (e: Exception) {
-            return false
-        }
-
-    }*/
     public boolean isClickable(String xpath) {
         try {
             return driver.findElement(By.xpath(xpath)).isEnabled();
@@ -139,6 +129,11 @@ public class DriverHelper {
         }
 
     }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
     public void selectByVisibleText(By by, String visibleText) {
         Select select = new Select(driver.findElement(by));
         select.deselectByVisibleText(visibleText);
@@ -192,6 +187,16 @@ public class DriverHelper {
             Assert.fail("Timeout waiting for Page Load Request to complete.");
         }
     }
-
-
+    public void waitForFrameToBeAvailableAndSwitchToIt(By by){
+        webDriverWait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+    }
+    public void switchToFrameByIndex(int index){
+        driver.switchTo().frame(index);
+    }
+    public void switchToParentFrame(){
+        driver.switchTo().parentFrame();
+    }
+    public void switchToDefaultContent(){
+        driver.switchTo().defaultContent();
+    }
 }

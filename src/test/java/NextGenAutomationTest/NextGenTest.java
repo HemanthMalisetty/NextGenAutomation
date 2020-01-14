@@ -1,27 +1,27 @@
 package NextGenAutomationTest;
 
 import BaseTest.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.NextGenAutomationLibrary;
+import utilities.ExcelUtil;
 
-import java.util.List;
+import java.util.*;
 
 public class NextGenTest extends BaseTest {
     @Test
     public void BookTitleValidations(){
-
-        /*BaseTest  baseTest = new BaseTest();
-        baseTest.beforeMethod("chrome", "https://www.nextgenerationautomation.com/automation-library");*/
-
+        ExcelUtil excelUtil = new ExcelUtil("BookTitles");
+        List<String> bookTitlesFromExcelSheet = excelUtil.getTitles();
+        /*Iterator it = bookTitlesFromExcelSheet.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }*/
 
         NextGenAutomationLibrary nextGen = new NextGenAutomationLibrary();
-        System.out.println(nextGen.noOfFramesAvailable());
-        /*int noOfBooks = nextGen.getTotalDisplayedBooks();
-        List<String> bookTitles = nextGen.getAllDisplayedBookTitles(noOfBooks);
+        List<String> bookTitlesFromApplication = nextGen.getAllDisplayedBookTitles();
 
-        System.out.println(noOfBooks);
-        System.out.println(bookTitles);*/
-
-        /*baseTest.afterMethod();*/
+        boolean equals = bookTitlesFromApplication.equals(bookTitlesFromExcelSheet);
+        Assert.assertTrue(equals, "Book titles are not matching with excel sheet data");
     }
 }

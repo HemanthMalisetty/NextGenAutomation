@@ -136,7 +136,7 @@
                 <configuration>
                     <suiteXmlFiles>
                         <!-- TestNG suite XML files -->
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>TestNg.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
